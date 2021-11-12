@@ -42,6 +42,14 @@ func (p Payload) MustUnmarshal(dst interface{}) interface{} {
 	return dst
 }
 
+func (p Payload) AsRequest() *events.APIGatewayProxyRequest {
+	return p.MustUnmarshal(new(events.APIGatewayProxyRequest)).(*events.APIGatewayProxyRequest)
+}
+
+func (p Payload) AsWsRequest() *events.APIGatewayWebsocketProxyRequest {
+	return p.MustUnmarshal(new(events.APIGatewayWebsocketProxyRequest)).(*events.APIGatewayWebsocketProxyRequest)
+}
+
 type Context struct {
 	Payload  Payload
 	index    int8
